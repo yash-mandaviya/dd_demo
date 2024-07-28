@@ -10,6 +10,8 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 def load_data():
     return pd.read_csv('content/dd_m1_income_levels_by_education.csv')
 
+data = load_data()
+
 # Load and display an image (e.g., a logo) in the sidebar
 logo_path = 'graphics/dd_logo.png'
 st.sidebar.image(logo_path, use_column_width=True)
@@ -31,10 +33,7 @@ st.sidebar.markdown("""
   - [Conclusion](#conclusion)
 """)
 
-
-
 st.title("Analyzing Wage Disparities by Education Level in Canada") 
-
 
 # Display the raw data
 st.write(data)
