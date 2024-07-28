@@ -31,6 +31,7 @@ st.sidebar.markdown("""
 - [Occupational Category Employment Changes](#occupational-category-employment-changes)
 - [Unemployment Rate Analysis](#unemployment-rate-analysis)
 - [Wage Rate and CPI Analysis](#wage-rate-and-cpi-analysis)
+- [Conclusion](#conclusion)
 """)
 
 df1 = pd.read_csv("content/labour-market-report-1.csv")
