@@ -39,12 +39,12 @@ st.title("Exploring Education Levels Across Canadian Regions")
 st.subheader("Introduction")
 st.write("This application explores the education levels across different regions of Canada, using data from 2019 to 2022. The following sections provide various visualizations and analyses to understand the educational attainment in these regions.")
 
-# Display the top rows of the dataframe
-st.write(df.head())
-
 # Descriptive statistics section
 st.subheader("Descriptive Statistics")
 st.write(df.describe())
+
+# Display the top rows of the dataframe
+st.write(df.head())
 
 # Define a function to plot educational attainment data for a given state using Matplotlib
 def plot_state_data(state):
