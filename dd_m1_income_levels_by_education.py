@@ -57,7 +57,7 @@ st.pyplot(fig)
 
 st.subheader('Density plot of wages by type of work') 
 sns.displot(data=data, x='Both Sexes', hue='Type of work', kind='kde')
-st.pyplot(fig)
+st.pyplot()
 
 st.subheader('Density plot of wages by type of work for Male')
 sns.displot(data=data, x='  Male', hue='Type of work', kind='kde')
