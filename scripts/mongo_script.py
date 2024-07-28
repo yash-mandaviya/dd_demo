@@ -9,17 +9,17 @@ client = MongoClient(connection_string)
 db_name = 'Data-Dynamos-DB'
 db = client[db_name]
 
-# Create the geographic_education_distribution collection
-collection_name_1 = 'geographic_education_distribution_collection'
-geographic_education_distribution_collection = db[collection_name_1]
+# Create the income_levels_by_education collection
+collection_name_1 = 'income_levels_by_education_collection'
+income_levels_by_education_collection = db[collection_name_1]
 
 # Create the employmentForecast collection
 collection_name_2 = 'employment_forecast_collection'
 employment_forecast_collection = db[collection_name_2]
 
-# Create the income_levels_by_education collection
-collection_name_3 = 'income_levels_by_education_collection'
-income_levels_by_education_collection = db[collection_name_3]
+# Create the geographic_education_distribution collection
+collection_name_3 = 'geographic_education_distribution_collection'
+geographic_education_distribution_collection = db[collection_name_3]
 
 # Open the CSV file for income_levels_by_education_collection
 with open('content/dd_m1_income_levels_by_education.csv', 'r') as file:
