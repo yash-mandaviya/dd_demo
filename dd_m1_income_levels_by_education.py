@@ -16,7 +16,7 @@ data = load_data()
 logo_path = 'graphics/dd_logo.png'
 st.sidebar.image(logo_path, use_column_width=True)
 
-# Add Table of Contents in the sidebar
+# Add Contents Overview in the sidebar
 st.sidebar.header('Contents Overview:')
 st.sidebar.markdown("""
   - [Sum of wages by education level](#sum-of-wages-by-education-level)

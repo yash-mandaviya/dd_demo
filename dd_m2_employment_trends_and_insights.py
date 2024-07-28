@@ -19,7 +19,7 @@ st.sidebar.image(logo_path, use_column_width=True)
 # Set the title of the app
 st.title('Insights into Ontario\'s Employment Landscape')
 
-# Add Table of Contents in the sidebar
+# Add Contents Overview in the sidebar
 st.sidebar.header('Contents Overview:')
 st.sidebar.markdown("""
 - [Data Overview](#data-overview)
@@ -40,15 +40,11 @@ df3 = pd.read_csv("content/labour-market-report-3.csv")
 df5 = pd.read_csv("content/labour-market-report-4.csv")
 df8 = pd.read_csv("content/labour-market-report-5.csv")
 
-
-
 # center on Liberty Bell, add marker
 m = folium.Map(location=[51.2538, -85.3232], zoom_start=5)
 
-
 # call to render Folium map in Streamlit
 st_data = st_folium(m, height=325, width=725)
-
 
 st.subheader('Data Overview')
 st.write('Employment in Ontario June 23 Dataset:')
@@ -77,21 +73,16 @@ df['Date'] = pd.to_datetime(df['Date'])
 # Create an interactive line plot using Plotly
 fig = go.Figure()
 
-fig.add_trace(go.Scatter(x=df['Date'], y=df['Ontario employment (x 1,000), seasonally adjusted'],
-                         mode='lines+markers', name='Ontario Employment (x 1,000)'))
+fig.add_trace(go.Scatter(x=df['Date'], y=df['Ontario employment (x 1,000), seasonally adjusted'], mode='lines+markers', 
+                         name='Ontario Employment (x 1,000)'))
 
-fig.update_layout(title='Ontario Employment Trend',
-                  xaxis_title='Date',
-                  yaxis_title='Ontario employment (x 1,000)',
-                  xaxis=dict(type='category'),
-                  yaxis=dict(title=dict(text='Ontario employment (x 1,000)')),
-                  hovermode='x',
+fig.update_layout(title='Ontario Employment Trend', xaxis_title='Date', yaxis_title='Ontario employment (x 1,000)',
+                  xaxis=dict(type='category'), yaxis=dict(title=dict(text='Ontario employment (x 1,000)')), hovermode='x',
                   template='plotly_white')
 
 st.plotly_chart(fig, use_container_width=True)
 
 ## Time Series Analysis
-######################################################################
 st.subheader('Time Series Analysis')
 df = pd.DataFrame(df1)
 
@@ -166,7 +157,6 @@ st.pyplot(plt)
 st.write('Forecasted Values for the Next 6 Months:')
 st.dataframe(predictions)
 
-######################################################################
 st.subheader('Long Term Forecast')
 df = pd.DataFrame(df1)
 
@@ -223,7 +213,7 @@ Employment in Ontario increased in June by 55,800 (0.7%) to 7,951,300, after dec
 
 Employment in Canada increased in June by 59,900 (0.3%), after decreasing by 17,300 (−0.1%) in May. A total of 20,172,800 people were employed in Canada in June.
 """
-######################################################################
+
 st.subheader('Industry Employment Analysis')
 df2.info()
 st.write(df2.describe())
@@ -249,7 +239,6 @@ combined_fig = scatter_fig.add_traces(line_fig.data)
 # Show the combined interactive plot
 st.plotly_chart(combined_fig, use_container_width=True)
 
-#####################################################################
 st.subheader('Employment Trend Analysis by Industry')
 df = pd.DataFrame(df2)
 # Remove specific SIC categories
@@ -286,7 +275,6 @@ Employment losses occurred in accommodation and food services (−2,700 or −0.
 
 Employment was unchanged in agriculture and utilities in June.
 """
-#####################################################################
 st.subheader('Occupational Category Employment Changes')
 df3.info()
 st.write(df3.describe())
@@ -316,7 +304,6 @@ Seven of the ten major occupational groups in Ontario had net employment gains i
 
 Employment losses were recorded in occupations in manufacturing and utilities (−20,600 or −5.4%), natural resources, agriculture and related production occupations (−9,200 or −10.7%), and natural and applied sciences and related occupations (−8,300 or −1.1%).
 """
-#####################################################################
 st.subheader('Unemployment Rate Analysis')
 df5.info()
 st.write(df5.describe())
@@ -360,7 +347,6 @@ June’s unemployment rate increased as employment gains were outpaced by gains 
 The Canadian unemployment rate rose to 5.4% in June from 5.2% in May
 """
 
-#####################################################################
 st.subheader('Wage Rate and CPI Analysis')
 
 df8.info()
