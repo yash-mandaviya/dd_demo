@@ -12,15 +12,15 @@ import folium
 from streamlit_folium import st_folium
 from datetime import datetime
 
-# Load and display an image in the sidebar
-logo_path = 'static/logo.png' 
+# Load and display an image (e.g., a logo) in the sidebar
+logo_path = 'graphics/dd_logo.png'
 st.sidebar.image(logo_path, use_column_width=True)
 
 # Set the title of the app
 st.title('Insights into Ontario\'s Employment Landscape')
 
 # Add Table of Contents in the sidebar
-st.sidebar.header('Table of Contents')
+st.sidebar.header('Contents Overview:')
 st.sidebar.markdown("""
 - [Data Overview](#data-overview)
 - [Employment in Ontario](#employment-in-ontario)
