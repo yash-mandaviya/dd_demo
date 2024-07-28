@@ -26,7 +26,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Sidebar for navigation
-st.sidebar.image("graphics/logo.png", use_column_width=True)  # Display the logo in the sidebar
+st.sidebar.image("graphics/dd_logo.png", use_column_width=True)  # Display the logo in the sidebar
 st.sidebar.title("Dashboard")
 selection = st.sidebar.radio("Go to module:", list(modules.keys()))
 
