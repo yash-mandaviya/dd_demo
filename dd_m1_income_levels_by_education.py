@@ -11,7 +11,7 @@ def load_data():
     return pd.read_csv('content/dd_m1_income_levels_by_education.csv')
 
 # Load and display an image (e.g., a logo) in the sidebar
-logo_path = 'graphics/logo.png'
+logo_path = 'graphics/dd_logo.png'
 st.sidebar.image(logo_path, use_column_width=True)
 
 # Add Table of Contents in the sidebar
