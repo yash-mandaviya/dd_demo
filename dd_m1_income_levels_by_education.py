@@ -4,7 +4,7 @@ import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+# st.set_option('deprecation.showPyplotGlobalUse', False)
 # Load the dataset with caching for efficiency
 @st.cache_data
 def load_data():
