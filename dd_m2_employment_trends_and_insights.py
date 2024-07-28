@@ -383,10 +383,12 @@ fig = px.line(df, x='Date', y=['CPI Inflation', 'Wage Change'], title='CPI Infla
 # Show the interactive plot
 st.plotly_chart(fig, use_container_width=True)
 
-
-"""
+# Conclusion section
+# This section provides a conclusion based on the analysis.
+st.subheader("Conclusion")
+st.write("""
 The graph demonstrates periods where wage changes do not align with CPI inflation trends. Notably, around 2020, the CPI inflation rate peaks sharply, likely outpacing wage growth. This discrepancy could indicate a period where the purchasing power of wages decreased due to inflation rising faster than wages. The mismatch between wage growth and inflation can lead to reduced real income for individuals, making it harder for consumers to maintain their standard of living. The instability in the CPI line after 2020, with continued fluctuations, could suggest ongoing economic challenges or recovery efforts. The data implies that wages have not consistently kept pace with inflation, a situation that can contribute to broader economic stress for the working population.
-"""
+""")
 
 # Add a footer
 footer_html = """
