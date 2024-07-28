@@ -28,7 +28,7 @@ st.sidebar.markdown("""
   - [Distribute Wages data into all available classes](#distribute-wages-data-into-all-available-classes)
   - [Bar plot of wages by age group](#bar-plot-of-wages-by-age-group)
   - [Correlation matrix](#correlation-matrix)
-  - [Bar plot of mean wages by education level (from pivot table)](#bar-plot-of-mean-wages-by-education-level-from-pivot-table)
+  - [Bar plot of mean wages by education level from pivot table](#bar-plot-of-mean-wages-by-education-level-from-pivot-table)
   - [Conclusion](#conclusion)
 """)
 
@@ -95,7 +95,7 @@ pivM = pd.pivot_table(data, values=['  Male'], index=['Education level'], column
 pivF = pd.pivot_table(data, values=['  Female'], index=['Education level'], columns=['Wages'], aggfunc={'  Female': [max, np.mean]})
 
 # Plotting pivot table
-st.subheader('Bar plot of mean wages by education level (from pivot table)')
+st.subheader('Bar plot of mean wages by education level from pivot table')
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.barplot(data=piv.reset_index(), x='Education level', y=piv.columns[0], ax=ax)
 plt.title('Mean Wages by Education Level')
