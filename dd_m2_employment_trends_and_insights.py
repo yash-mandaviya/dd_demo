@@ -33,11 +33,11 @@ st.sidebar.markdown("""
 - [Wage Rate and CPI Analysis](#wage-rate-and-cpi-analysis)
 """)
 
-df1 = pd.read_csv("content/labour-market-report-chart-1-Emplyment in Ontario june 23.csv")
-df2 = pd.read_csv("content/labour-market-report-chart-2-Industries with highest and lowest emp change jun 23.csv")
-df3 = pd.read_csv("content/labour-market-report-chart-3-employment change in ontario june 23.csv")
-df5 = pd.read_csv("content/labour-market-report-chart-5-unemployment rates.csv")
-df8 = pd.read_csv("content/labour-market-report-chart-8- change in wage rate and CPI june 23.csv")
+df1 = pd.read_csv("content/labour-market-report-1.csv")
+df2 = pd.read_csv("content/labour-market-report-2.csv")
+df3 = pd.read_csv("content/labour-market-report-3.csv")
+df5 = pd.read_csv("content/labour-market-report-4.csv")
+df8 = pd.read_csv("content/labour-market-report-5.csv")
 
 
 
