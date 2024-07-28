@@ -11,7 +11,7 @@ import plotly.graph_objs as go
 # Load the dataset with caching for efficiency
 @st.cache_data
 def load_data():
-    return pd.read_csv('dd_m3_geographic_education_distribution.csv')
+    return pd.read_csv('content/dd_m3_geographic_education_distribution.csv')
 
 df = load_data()
 
