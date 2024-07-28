@@ -27,8 +27,14 @@ with open('content/dd_m1_income_levels_by_education.csv', 'r') as file:
     next(csv_data)  # Skip the header row
     for row in csv_data:
         data = {
-            'education_level': row[0],
-            'wage_rate': row[1]
+            'year': row[0],
+            'region': row[1],
+            'type of work': row[2],
+            'level of education': row[4],
+            'age group': row[5],
+            'both sex combined' : row[6],
+            'male' : row[7],
+            'female' : row[8],
         }
         income_levels_by_education_collection.insert_one(data)
 
