@@ -19,7 +19,6 @@ st.sidebar.image(logo_path, use_column_width=True)
 # Add Table of Contents in the sidebar
 st.sidebar.header('Contents Overview:')
 st.sidebar.markdown("""
-  # - [Column names](#column-names)
   - [Sum of wages by education level](#sum-of-wages-by-education-level)
   - [Mean wages by education level](#mean-wages-by-education-level)
   - [Bar plot of mean wages by education level](#bar-plot-of-mean-wages-by-education-level)
@@ -37,10 +36,6 @@ st.title("Analyzing Wage Disparities by Education Level in Canada")
 
 # Display the raw data
 st.write(data)
-
-# Display column names
-# st.subheader('Column names')
-# st.write(data.columns)
 
 # Grouping and summarizing data
 grouped_data = data.groupby('Education level')[['  Male', '  Female', 'Both Sexes']]
