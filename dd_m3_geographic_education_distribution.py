@@ -35,10 +35,12 @@ st.sidebar.markdown("""
 st.title("Exploring Education Levels Across Canadian Regions")
 
 # Introduction section
+# This section introduces the topic and provides an overview of the content.
 st.subheader("Introduction")
 st.write("This module explores the education levels across different regions of Canada, using data from 2019 to 2022. The following sections provide various visualizations and analyses to understand the educational attainment in these regions.")
 
 # Descriptive statistics section
+# This section displays descriptive statistics for the dataset.
 st.subheader("Descriptive Statistics")
 st.write(df.describe())
 
@@ -63,10 +65,11 @@ def plot_state_data(state):
     plt.legend()
     st.pyplot(plt)
 
-# Plotting with Matplotlib section
+# Matplotlib Visualizations section
+# This section provides Matplotlib visualizations for a selected state.
 st.subheader("Matplotlib Visualizations")
-for state in df['Geography'].unique():
-    plot_state_data(state)
+selected_state_matplotlib = st.selectbox("Select a State for Matplotlib Visualizations:", df['Geography'].unique())
+plot_state_data(selected_state_matplotlib)
 
 # Define a function to create interactive graphs using Plotly for a given state
 def interactive_graphs(state):
@@ -98,11 +101,13 @@ def interactive_graphs(state):
     st.plotly_chart(fig)
 
 # Interactive Plotly Visualizations section
+# This section provides interactive visualizations using Plotly for a selected state.
 st.subheader("Interactive Plotly Visualizations")
-selected_state = st.selectbox("Select a State for Detailed View:", df['Geography'].unique())
-interactive_graphs(selected_state)
+selected_state_plotly = st.selectbox("Select a State for Plotly Visualizations:", df['Geography'].unique())
+interactive_graphs(selected_state_plotly)
 
 # Correlation Matrix section
+# This section displays a correlation matrix heatmap.
 st.subheader("Correlation Matrix")
 correlation_matrix = df.corr(numeric_only=True)
 st.write(correlation_matrix)
@@ -111,6 +116,7 @@ sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
 st.pyplot(fig)
 
 # Clustering of States based on Education Statistics section
+# This section clusters states based on their education statistics using K-means clustering.
 st.subheader("Clustering of States based on Education Statistics")
 
 # Pivot the data to have states as rows and years as columns
@@ -162,12 +168,14 @@ fig.update_traces(hovertemplate='<b>%{hovertext}</b><br>Cluster: %{marker.color}
 st.plotly_chart(fig)
 
 # Conclusion section
+# This section provides a conclusion based on the analysis.
 st.subheader("Conclusion")
 st.write("""
 The overarching conclusion is that Canada's education levels are comparable to OECD averages, with strong upper secondary and post-secondary non-tertiary attainment. However, there are regional disparities, especially in tertiary education, that could be influenced by local factors. This suggests a need for targeted educational policies to address regional discrepancies and to maintain or improve educational standards nationwide.
 """)
 
 # Footer section
+# This section provides the footer information for the application.
 footer_html = """
 <div style='text-align: center;'>
     <p style='margin: 20px 0;'>
