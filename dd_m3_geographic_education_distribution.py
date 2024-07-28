@@ -16,8 +16,8 @@ def load_data():
 df = load_data()
 
 # Load and display an image (e.g., a logo) in the sidebar
-logo_path = 'graphics/logo.png'
-st.sidebar.image(logo_path, use_column_width=True)
+#logo_path = 'graphics/logo.png'
+st.sidebar.image('graphics/logo.png', use_column_width=True)
 
 # Add Table of Contents in the sidebar
 st.sidebar.header('Contents Overview:')
