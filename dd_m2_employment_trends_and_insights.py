@@ -235,12 +235,12 @@ df2.columns = df2.columns.str.strip()
 # Create a scatter plot using plotly express
 import plotly.express as px
 scatter_fig = px.scatter(df2, x='Month', y='Employment, Ontario (000)', color='SIC',
-                         labels={'Employment, Ontario (000)': 'Employment (in thousands)'},
+                         labels={'Employment, Ontario': 'Employment (in thousands)'},
                          width=1200, height=700)
 
 # Create a line plot using plotly express
 line_fig = px.line(df2, x='Month', y='Employment, Ontario (000)', color='SIC',
-                   labels={'Employment, Ontario (000)': 'Employment (in thousands)'},
+                   labels={'Employment, Ontario': 'Employment (in thousands)'},
                    width=1200, height=700)
 
 # Combine both plots into one figure
