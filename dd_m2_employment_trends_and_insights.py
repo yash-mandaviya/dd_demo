@@ -213,8 +213,8 @@ While the 'Forecast' line suggests a smooth upward trend in employment, a more c
 """
 
 
-# Display the forecasted values until 2028
-st.write('Forecasted Values until 2028:')
+# Display the forecasted values until 2024
+st.write('Forecasted Values until 2024:')
 st.dataframe(filtered_predictions)
 
 
