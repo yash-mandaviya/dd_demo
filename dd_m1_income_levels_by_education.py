@@ -55,10 +55,9 @@ fig, ax = plt.subplots()
 sns.barplot(x='Both Sexes', y='Education level', color='blue', data=data, ax=ax)
 st.pyplot(fig)
 
-st.subheader('Density plot of wages by type of work') 
-fig, ax = plt.subplots()
-sns.displot(data=data, x='Both Sexes', hue='Type of work', kind='kde',ax=ax)
-st.pyplot(fig)
+st.subheader('Density plot of wages by type of work')
+sns.displot(data=data, x='Both Sexes', hue='Type of work', kind='kde')
+st.pyplot()
 
 st.subheader('Density plot of wages by type of work for Male')
 sns.displot(data=data, x='  Male', hue='Type of work', kind='kde')
