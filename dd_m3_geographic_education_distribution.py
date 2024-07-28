@@ -1,173 +1,120 @@
-import matplotlib.pyplot as plt
 import streamlit as st
+import numpy as np
 import seaborn as sns
 import pandas as pd
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-import plotly.express as px
-from PIL import Image
-import plotly.graph_objs as go
+import matplotlib.pyplot as plt
 
-# Load the dataset with caching for efficiency
-@st.cache_data
-def load_data():
-    return pd.read_csv('content/dd_m1_income_levels_by_education.csv')
-
-df = load_data()
+st.set_option('deprecation.showPyplotGlobalUse', False)
+# Load data
+data = pd.read_csv('content/dd_m1_income_levels_by_education.csv')
 
 # Load and display an image (e.g., a logo) in the sidebar
-logo_path = 'graphics/dd_logo.png'
+logo_path = 'graphics/logo.png'
 st.sidebar.image(logo_path, use_column_width=True)
 
 # Add Table of Contents in the sidebar
 st.sidebar.header('Contents Overview:')
 st.sidebar.markdown("""
-- [Introduction](#introduction)
-- [Descriptive Statistics](#descriptive-statistics)
-- [Matplotlib Visualizations](#matplotlib-visualizations)
-- [Interactive Plotly Visualizations](#interactive-plotly-visualizations)
-- [Correlation Matrix](#correlation-matrix)
-- [Clustering of States based on Education Statistics](#clustering-of-states-based-on-education-statistics)
-- [Conclusion](#conclusion)
+  # - [Column names](#column-names)
+  - [Sum of wages by education level](#sum-of-wages-by-education-level)
+  - [Mean wages by education level](#mean-wages-by-education-level)
+  - [Bar plot of mean wages by education level](#bar-plot-of-mean-wages-by-education-level)
+  - [Density plot of wages by type of work for Male](#density-plot-of-wages-by-type-of-work-for-male)
+  - [Density plot of wages by type of work for Female](#density-plot-of-wages-by-type-of-work-for-female)
+  - [Density plot of wages by type of work](#density-plot-of-wages-by-type-of-work)
+  - [Distribute Wages data into all available classes](#distribute-wages-data-into-all-available-classes)
+  - [Bar plot of wages by age group](#bar-plot-of-wages-by-age-group)
+  - [Correlation matrix](#correlation-matrix)
+  - [Bar plot of mean wages by education level (from pivot table)](#bar-plot-of-mean-wages-by-education-level-from-pivot-table)
+  - [Conclusion](#conclusion)
 """)
 
-# Main title of the application
-st.title("Exploring Education Levels Across Canadian Regions")
 
-# Introduction section
-st.subheader("Introduction")
-st.write("This module explores the education levels across different regions of Canada, using data from 2019 to 2022. The following sections provide various visualizations and analyses to understand the educational attainment in these regions.")
 
-# Descriptive statistics section
-st.subheader("Descriptive Statistics")
-st.write(df.describe())
+st.title("Analyzing Wage Disparities by Education Level in Canada") 
 
-# Display the top rows of the dataframe
-st.write("Education Level Data from 2019-2022:", df.head())
 
-# Define a function to plot educational attainment data for a given state using Matplotlib
-def plot_state_data(state):
-    state_data = df[df['Geography'] == state]
-    below_secondary_mean = state_data[state_data['Educational attainment level'] == 'Below upper secondary 7'].iloc[:, 2:].mean(numeric_only=True)
-    post_secondary_mean = state_data[state_data['Educational attainment level'] == 'Upper secondary and post-secondary non-tertiary'].iloc[:, 2:].mean(numeric_only=True)
-    tertiary_mean = state_data[state_data['Educational attainment level'] == 'Tertiary education'].iloc[:, 2:].mean(numeric_only=True)
+# Display the raw data
+st.write(data)
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(below_secondary_mean.index, below_secondary_mean.values, label='Below Upper Secondary 7')
-    plt.plot(post_secondary_mean.index, post_secondary_mean.values, label='Upper Secondary and Post-Secondary Non-Tertiary')
-    plt.plot(tertiary_mean.index, tertiary_mean.values, label='Tertiary Education')
-    plt.title(f"Educational Attainment in {state}")
-    plt.xlabel("Year")
-    plt.ylabel("Mean Percentage")
-    plt.grid(True)
-    plt.legend()
-    st.pyplot(plt)
+# Display column names
+# st.subheader('Column names')
+# st.write(data.columns)
 
-# Plotting with Matplotlib section
-st.subheader("Matplotlib Visualizations")
-for state in df['Geography'].unique():
-    plot_state_data(state)
+# Grouping and summarizing data
+grouped_data = data.groupby('Education level')[['  Male', '  Female', 'Both Sexes']]
+sum_data = grouped_data.sum()
+mean_data = grouped_data.mean()
 
-# Define a function to create interactive graphs using Plotly for a given state
-def interactive_graphs(state):
-    state_data = df[df['Geography'] == state]
-    categories = ['Below upper secondary 7', 'Upper secondary and post-secondary non-tertiary', 'Tertiary education']
-    years = df.columns[2:].tolist()  # Assuming year columns start from 3rd column
+# Display data summaries
+st.subheader('Sum of wages by education level')
+st.write(sum_data)
 
-    data = {year: [state_data[state_data['Educational attainment level'] == category][year].values[0] if not state_data[state_data['Educational attainment level'] == category][year].empty else None for category in categories] for year in years}
-    traces = []
-    for year in years:
-        if all(data[year]):
-            trace = go.Scatter(x=categories, y=data[year], mode='lines+markers', name=year,
-                               hovertemplate='<b>%{x}</b><br>%{y:.2f}%<extra></extra>')
-            traces.append(trace)
+st.subheader('Mean wages by education level')
+st.write(mean_data)
 
-    layout = go.Layout(
-        title=f'Educational Attainment in {state}',
-        xaxis=dict(title='Education Categories'),
-        yaxis=dict(title='Percentage'),
-        legend=dict(orientation='h', x=0.1, y=-0.2)
-    )
-    fig = go.Figure(data=traces, layout=layout)
-    fig.update_layout(
-        hovermode='closest',
-        template='plotly_dark',  # Dark theme
-        showlegend=True,
-        legend=dict(title='Year', orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
-    )
-    st.plotly_chart(fig)
-
-# Interactive Plotly Visualizations section
-st.subheader("Interactive Plotly Visualizations")
-selected_state = st.selectbox("Select a State for Detailed View:", df['Geography'].unique())
-interactive_graphs(selected_state)
-
-# Correlation Matrix section
-st.subheader("Correlation Matrix")
-correlation_matrix = df.corr(numeric_only=True)
-st.write(correlation_matrix)
+# Plotting
+st.subheader('Bar plot of mean wages by education level')
 fig, ax = plt.subplots()
-sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+sns.barplot(x='Both Sexes', y='Education level', color='blue', data=data, ax=ax)
 st.pyplot(fig)
 
-# Clustering of States based on Education Statistics section
-st.subheader("Clustering of States based on Education Statistics")
+st.subheader('Density plot of wages by type of work')
+sns.displot(data=data, x='Both Sexes', hue='Type of work', kind='kde')
+st.pyplot()
 
-# Pivot the data to have states as rows and years as columns
-pivot_data = df.pivot(index='Geography', columns='Educational attainment level')
+st.subheader('Density plot of wages by type of work for Male')
+sns.displot(data=data, x='  Male', hue='Type of work', kind='kde')
+st.pyplot()
 
-# Flatten the multi-level column index for simplicity
-pivot_data.columns = ['_'.join(col).strip() for col in pivot_data.columns.values]
+st.subheader('Density plot of wages by type of work For Female')
+sns.displot(data=data, x='  Female', hue='Type of work', kind='kde')
+st.pyplot()
 
-# Select only the columns containing years (assuming year columns have numeric names)
-year_columns = [col for col in pivot_data.columns if col.split('_')[0].isdigit()]
+st.subheader('Distribute Wages data into all available classes')
+sns.displot(data=data, x='Both Sexes', hue= 'Wages', kind = 'ecdf')
+st.pyplot()
+sns.displot(data=data, x='  Male', hue= 'Wages', kind = 'ecdf')
+st.pyplot()
+sns.displot(data=data, x='  Female', hue= 'Wages', kind = 'ecdf')
+st.pyplot()
 
-# Select data for clustering
-X = pivot_data[year_columns]
+st.subheader('Bar plot of wages by age group')
+sns.barplot(x='Both Sexes', y='Age group', data=data,palette='viridis')
+st.pyplot()
+sns.barplot(x='  Male', y='Age group', data=data,palette='viridis')
+st.pyplot()
+sns.barplot(x='  Female', y='Age group', data=data,palette='viridis')
+st.pyplot()
 
-# Normalize the data
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+# Correlation matrix
+numeric_data = data.select_dtypes(include=[np.number])
+corr_matrix = numeric_data.corr()
+st.subheader('Correlation matrix')
+st.write(corr_matrix)
 
-# Choose the number of clusters
-num_clusters = 3
+# Pivot tables
+piv = pd.pivot_table(data, values=['Both Sexes'], index=['Education level'], columns=['Wages'], aggfunc={'Both Sexes': [max, np.mean]})
+pivM = pd.pivot_table(data, values=['  Male'], index=['Education level'], columns=['Wages'], aggfunc={'  Male': [max, np.mean]})
+pivF = pd.pivot_table(data, values=['  Female'], index=['Education level'], columns=['Wages'], aggfunc={'  Female': [max, np.mean]})
 
-# Apply K-means clustering
-kmeans = KMeans(n_clusters=num_clusters, n_init=10, random_state=42)
-cluster_labels = kmeans.fit_predict(X_scaled)
-
-# Add cluster labels to the original data
-pivot_data['Cluster'] = cluster_labels
-
-# Define colors for each cluster
-cluster_colors = {0: 'darkblue', 1: 'green', 2: 'red'}  # Adjust colors as needed
-
-# Define marker sizes for each cluster
-cluster_sizes = {0: 15, 1: 12, 2: 12}  # Adjust sizes as needed
-
-# Visualize the clusters with state labels
-fig = px.scatter(x=X_scaled[:, 0], y=X_scaled[:, 1], color=cluster_labels, hover_name=pivot_data.index, color_discrete_map=cluster_colors)
-fig.update_traces(marker=dict(size=[cluster_sizes[label] for label in cluster_labels]))  # Update marker sizes
-fig.update_layout(
-    title='Clustering of States based on Education Statistics',
-    xaxis_title='Principal Component 1',
-    yaxis_title='Principal Component 2',
-    showlegend=True,
-    legend_title='Cluster'
-)
-
-# Update hover template for clarity
-fig.update_traces(hovertemplate='<b>%{hovertext}</b><br>Cluster: %{marker.color}')
-
-st.plotly_chart(fig)
+# Plotting pivot table
+st.subheader('Bar plot of mean wages by education level (from pivot table)')
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(data=piv.reset_index(), x='Education level', y=piv.columns[0], ax=ax)
+plt.title('Mean Wages by Education Level')
+plt.xlabel('Education Level')
+plt.xticks(rotation=90)
+plt.ylabel('Mean Wages (in thousands)')
+st.pyplot(fig)
 
 # Conclusion section
 st.subheader("Conclusion")
 st.write("""
-The overarching conclusion is that Canada's education levels are comparable to OECD averages, with strong upper secondary and post-secondary non-tertiary attainment. However, there are regional disparities, especially in tertiary education, that could be influenced by local factors. This suggests a need for targeted educational policies to address regional discrepancies and to maintain or improve educational standards nationwide.
+The bar chart demonstrates a positive correlation between the level of education and mean wages; generally, individuals with higher education levels earn higher wages. This trend is consistent with the economic theory that investment in human capital, such as education, enhances productivity and, consequently, earnings. There are, however, some nuances, such as 'Trade Certificate or Diploma' earning similar to 'Community College/CEGEP,' which might be due to specific demand for skilled trades. The 'Total all education levels' bar provides a benchmark mean wage against which the wages for specific education levels can be compared.
 """)
 
-# Footer section
+# Add a footer
 footer_html = """
 <div style='text-align: center;'>
     <p style='margin: 20px 0;'>
