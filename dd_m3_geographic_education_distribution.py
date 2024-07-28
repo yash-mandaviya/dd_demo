@@ -170,7 +170,6 @@ The overarching conclusion is that Canada's education levels are comparable to O
 """)
 
 # Footer section
-st.subheader("Footer")
 footer_html = """
 <div style='text-align: center;'>
     <p style='margin: 20px 0;'>
