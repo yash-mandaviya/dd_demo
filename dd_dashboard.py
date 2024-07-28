@@ -11,7 +11,7 @@ st.set_page_config(
 modules = {
     "Income Levels by Education": "https://adt-data-dynamos-wageseducation.streamlit.app",
     "Employment Trends and Insights": "https://adt-data-dynamos-employmentforecast.streamlit.app",
-    "Geographic Education Distribution": "https://adt-data-dynamos-education.streamlit.app"
+    "Geographic Education Distribution": "https://dddemo-m3-geographic-education-distribution.streamlit.app"
 }
 
 # Custom CSS for sidebar
