@@ -238,9 +238,6 @@ scatter_fig = px.scatter(df2, x='Month', y='Employment, Ontario (000)', color='S
                          labels={'Employment, Ontario (000)': 'Employment (in thousands)'},
                          width=1200, height=700)
 
-# Check the column names and ensure they are correct
-st.write("Columns in df2:", df2.columns)
-
 # Create a line plot using plotly express
 line_fig = px.line(df2, x='Month', y='Employment, Ontario (000)', color='SIC',
                    labels={'Employment, Ontario (000)': 'Employment (in thousands)'},
