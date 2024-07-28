@@ -36,7 +36,7 @@ st.title("Exploring Education Levels Across Canadian Regions")
 
 # Introduction section
 st.subheader("Introduction")
-st.write("This application explores the education levels across different regions of Canada, using data from 2019 to 2022. The following sections provide various visualizations and analyses to understand the educational attainment in these regions.")
+st.write("This module explores the education levels across different regions of Canada, using data from 2019 to 2022. The following sections provide various visualizations and analyses to understand the educational attainment in these regions.")
 
 # Descriptive statistics section
 st.subheader("Descriptive Statistics")
