@@ -29,7 +29,6 @@ st.sidebar.markdown("""
 - [Correlation Matrix](#correlation-matrix)
 - [Clustering of States based on Education Statistics](#clustering-of-states-based-on-education-statistics)
 - [Conclusion](#conclusion)
-- [Footer](#footer)
 """)
 
 # Main title of the application
