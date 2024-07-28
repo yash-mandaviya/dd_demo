@@ -59,7 +59,7 @@ toolz==0.12.1
 tornado==6.4
 typing_extensions==4.10.0
 tzdata==2024.1
-urllib3==2.2.1
+urllib3==2.2.2
 Werkzeug==3.0.1
 xyzservices==2023.10.1
 zipp==3.18.1
