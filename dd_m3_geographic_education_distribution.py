@@ -63,13 +63,10 @@ def plot_state_data(state):
     plt.legend()
     st.pyplot(plt)
 
-# Clustering of States based on Education Statistics section
-st.subheader("Matplotlib Visualizations")
-
 # Plotting with Matplotlib section
-if st.checkbox("Show Matplotlib Graphs"):
-    for state in df['Geography'].unique():
-        plot_state_data(state)
+st.subheader("Matplotlib Visualizations")
+for state in df['Geography'].unique():
+    plot_state_data(state)
 
 # Define a function to create interactive graphs using Plotly for a given state
 def interactive_graphs(state):
