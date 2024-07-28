@@ -43,7 +43,7 @@ st.subheader("Descriptive Statistics")
 st.write(df.describe())
 
 # Display the top rows of the dataframe
-st.write(df.head())
+st.write("Education Level Data from 2019-2022:", df.head())
 
 # Define a function to plot educational attainment data for a given state using Matplotlib
 def plot_state_data(state):
