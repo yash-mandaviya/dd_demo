@@ -40,7 +40,7 @@ st.subheader("Introduction")
 st.write("This application explores the education levels across different regions of Canada, using data from 2019 to 2022. The following sections provide various visualizations and analyses to understand the educational attainment in these regions.")
 
 # Display the top rows of the dataframe
-st.write("Education Level Data from 2019-2022:", df.head())
+st.write(df.head())
 
 # Descriptive statistics section
 st.subheader("Descriptive Statistics")
